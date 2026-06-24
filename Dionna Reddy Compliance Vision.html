@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dionna Reddy | Director of Quality &amp; Compliance Vision</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0f2640;--navyMid:#152f52;--teal:#1a6b60;--gold:#d4a843;--goldLight:#e8c86a;
+  --white:#fff;--cream:#f2f6f5;--muted:#5a7068;--border:#daeae4;
+  --green:#2d9e6b;--amber:#e09b2d;--red:#c94040;--blue:#4a8cc4;
+  --purple:#7b5ea7;--orange:#d4693a;
+}
+body{font-family:"DM Sans",sans-serif;background:var(--navy);color:#fff;min-height:100vh}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:var(--teal);border-radius:3px}
+.header{background:var(--navy);border-bottom:1px solid rgba(255,255,255,0.08);padding:18px 24px 0}
+.header-inner{max-width:960px;margin:0 auto}
+.header-top{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:16px}
+.eyebrow{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:4px}
+.name{font-size:clamp(20px,3vw,30px);font-weight:700;line-height:1.1}
+.name span{color:var(--gold);font-style:italic;font-size:0.6em}
+.subline{font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px}
+.stats{display:flex;gap:16px;flex-wrap:wrap}
+.stat-mini{text-align:center}
+.stat-mini-val{font-size:18px;font-weight:700;color:var(--gold)}
+.stat-mini-lbl{font-size:9px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.5px}
+.tabs{display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,0.08);overflow-x:auto}
+.tab-btn{padding:9px 14px;font-size:11px;font-family:inherit;font-weight:500;background:transparent;border:none;cursor:pointer;white-space:nowrap;color:rgba(255,255,255,0.4);border-bottom:2px solid transparent;margin-bottom:-1px;transition:color 0.2s}
+.tab-btn.active{color:#fff;border-bottom:2px solid var(--teal)}
+.main{max-width:960px;margin:0 auto;padding:20px 24px 60px}
+.tab-content{display:none}.tab-content.active{display:block}
+.sl{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin:18px 0 10px}
+.kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:18px}
+.kpi-card{background:var(--navyMid);border-radius:4px;padding:14px 10px;text-align:center}
+.kpi-val{font-size:26px;font-weight:700}
+.kpi-lbl{font-size:9px;color:rgba(255,255,255,0.5);margin-top:3px;text-transform:uppercase;letter-spacing:0.5px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:10px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:10px}
+.dc{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:4px;padding:16px}
+.dc-title{font-size:12px;font-weight:600;color:var(--goldLight);margin-bottom:2px}
+.dc-sub{font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:10px;font-style:italic}
+.lc{background:var(--white);border:1.5px solid var(--border);border-radius:3px;padding:14px}
+.prog-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.prog-label{font-size:10px;color:rgba(255,255,255,0.7);flex:0 0 130px}
+.prog-track{flex:1;height:6px;background:rgba(255,255,255,0.08);border-radius:99px;overflow:hidden}
+.prog-fill{height:100%;border-radius:99px}
+.prog-val{font-size:10px;font-weight:600;width:30px;text-align:right;flex-shrink:0}
+.donut-wrap{display:flex;align-items:center;gap:14px;margin-top:6px}
+.legend-item{display:flex;align-items:center;gap:7px;margin-bottom:7px;font-size:11px;color:rgba(255,255,255,0.75)}
+.legend-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+.legend-val{font-weight:600;color:#fff;margin-left:auto}
+.funder-row{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:3px;gap:12px;margin-bottom:7px}
+.funder-name{font-size:12px;color:rgba(255,255,255,0.9);font-weight:500}
+.funder-note{font-size:10px;color:rgba(255,255,255,0.4);margin-top:1px}
+.badge{font-size:10px;font-weight:600;padding:3px 10px;border-radius:99px;flex-shrink:0}
+.alert-box{border-radius:4px;padding:14px 16px;margin-bottom:16px}
+.prog-card{background:var(--white);border:1.5px solid var(--border);border-radius:3px;padding:14px;margin-bottom:10px}
+.prog-card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+.prog-card-name{font-weight:600;font-size:13px;color:#0f2640}
+.prog-card-services{font-size:10px;color:var(--muted);margin-top:2px}
+.prog-card-reg{font-size:10px;color:var(--muted);margin-top:6px}
+.phase-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:4px;padding:18px 14px}
+.phase-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+.phase-title{font-size:15px;color:#fff;font-weight:700;margin-bottom:12px}
+.phase-item{display:flex;gap:7px;font-size:11px;line-height:1.55;color:rgba(255,255,255,0.8);margin-bottom:9px}
+.deliv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.deliv-item{display:flex;align-items:flex-start;gap:6px;font-size:11px;color:rgba(255,255,255,0.8)}
+.risk-row{display:flex;align-items:center;gap:12px;padding:10px 14px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:3px;margin-bottom:7px}
+.risk-name{font-size:12px;font-weight:600;color:rgba(255,255,255,0.9)}
+.risk-prog{font-size:10px;color:rgba(255,255,255,0.4);margin-top:1px}
+.risk-mitigation{font-size:11px;color:rgba(255,255,255,0.65);font-style:italic}
+.board-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:4px;padding:16px}
+.board-cadence{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.board-item{display:flex;gap:7px;font-size:11px;color:rgba(255,255,255,0.8);margin-bottom:8px}
+.data-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:4px;padding:14px}
+.data-icon{font-size:16px;margin-bottom:6px}
+.data-title{font-weight:600;font-size:12px;color:var(--goldLight);margin-bottom:4px}
+.data-desc{font-size:11px;color:rgba(255,255,255,0.6);line-height:1.5}
+@media(max-width:600px){.grid2,.grid3,.grid4,.kpi-grid{grid-template-columns:1fr!important}.header{padding:14px 16px 0}.main{padding:14px 16px 40px}}
+</style>
+</head>
+<body>
+
+<div class="header">
+<div class="header-inner">
+  <div class="header-top">
+    <div>
+      <p class="eyebrow">Director of Quality &amp; Compliance &mdash; Interview Vision</p>
+      <h1 class="name">Dionna Reddy <span>MPA</span></h1>
+      <p class="subline">The Consortium, Inc. &mdash; 3751 Island Ave, Philadelphia, PA 19153</p>
+    </div>
+    <div class="stats">
+      <div class="stat-mini"><div class="stat-mini-val">6</div><div class="stat-mini-lbl">Programs</div></div>
+      <div class="stat-mini"><div class="stat-mini-val">7</div><div class="stat-mini-lbl">Funders</div></div>
+      <div class="stat-mini"><div class="stat-mini-val">12</div><div class="stat-mini-lbl">Trainings</div></div>
+      <div class="stat-mini"><div class="stat-mini-val">15+</div><div class="stat-mini-lbl">Yrs Exp</div></div>
+    </div>
+  </div>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('kpi')">&#128202; KPIs</button>
+    <button class="tab-btn" onclick="showTab('programs')">&#127970; Programs</button>
+    <button class="tab-btn" onclick="showTab('training')">&#128218; Training</button>
+    <button class="tab-btn" onclick="showTab('quality')">&#128200; Quality</button>
+    <button class="tab-btn" onclick="showTab('plan')">&#128197; 90-Day Plan</button>
+    <button class="tab-btn" onclick="showTab('data')">&#128203; Data, Equity &amp; Risk</button>
+  </div>
+</div>
+</div>
+
+<div class="main">
+
+<!-- TAB 1: KPIs -->
+<div id="tab-kpi" class="tab-content active">
+  <div class="kpi-grid">
+    <div class="kpi-card" style="border-bottom:3px solid var(--teal)"><div class="kpi-val" style="color:var(--teal)" id="c1">0%</div><div class="kpi-lbl">Org Compliance Score</div></div>
+    <div class="kpi-card" style="border-bottom:3px solid var(--amber)"><div class="kpi-val" style="color:var(--amber)" id="c2">0</div><div class="kpi-lbl">Open CAPs</div></div>
+    <div class="kpi-card" style="border-bottom:3px solid var(--blue)"><div class="kpi-val" style="color:var(--blue)" id="c3">0%</div><div class="kpi-lbl">Training Completion</div></div>
+    <div class="kpi-card" style="border-bottom:3px solid var(--gold)"><div class="kpi-val" style="color:var(--gold)" id="c4">0</div><div class="kpi-lbl">Findings YTD</div></div>
+    <div class="kpi-card" style="border-bottom:3px solid var(--green)"><div class="kpi-val" style="color:var(--green)" id="c5">0</div><div class="kpi-lbl">Programs Monitored</div></div>
+  </div>
+  <div class="grid2">
+    <div class="dc"><p class="dc-title">Org-Wide Compliance Score Trend</p><p class="dc-sub">Monthly &mdash; all 6 program areas</p><canvas id="trendChart" height="150"></canvas></div>
+    <div class="dc"><p class="dc-title">Audit Findings &mdash; Opened vs. Resolved</p><p class="dc-sub">Quarterly across all programs</p><canvas id="auditChart" height="150"></canvas></div>
+  </div>
+  <div class="grid2">
+    <div class="dc"><p class="dc-title">CAP Status &mdash; All Programs</p><p class="dc-sub">Current cycle</p>
+      <div class="donut-wrap"><canvas id="capChart" width="90" height="90" style="flex-shrink:0"></canvas>
+        <div id="capLegend" style="flex:1"></div>
+      </div>
+    </div>
+    <div class="dc"><p class="dc-title">Compliance Score by Program Division</p>
+      <div id="programBars" style="margin-top:6px"></div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB 2: PROGRAMS -->
+<div id="tab-programs" class="tab-content">
+  <p class="sl">&#9658; All Consortium Program Areas &mdash; Compliance Status</p>
+  <div id="programCards" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px"></div>
+  <p class="sl">&#9658; Funder &amp; Regulatory Monitoring Calendar</p>
+  <div id="funderList" style="margin-bottom:16px"></div>
+  <div class="alert-box" style="background:rgba(201,64,64,0.12);border:1px solid var(--red)">
+    <p style="font-size:12px;font-weight:600;color:var(--red);margin-bottom:6px">&#9888; High Priority &mdash; 42 CFR Part 2 Compliance (Addiction Services)</p>
+    <p style="font-size:12px;color:rgba(255,255,255,0.8);line-height:1.65">The Consortium&apos;s Addiction Services and MAT programs are subject to <strong>42 CFR Part 2</strong> &mdash; federal law governing confidentiality of substance use disorder records. This requires dedicated policies, explicit patient consent for all disclosures, staff training, and audit protocols separate from HIPAA. Establishing a standalone 42 CFR Part 2 compliance framework will be a Day 1 priority.</p>
+  </div>
+</div>
+
+<!-- TAB 3: TRAINING -->
+<div id="tab-training" class="tab-content">
+  <p class="sl">&#9658; Required Training Completion &mdash; All Programs &amp; Staff Roles</p>
+  <div id="trainingBars" style="display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;margin-bottom:18px"></div>
+  <div class="grid2" style="margin-bottom:14px">
+    <div class="dc"><p class="dc-title">Staff Clearance Currency (Acts 33/34/73)</p><p class="dc-sub">All staff serving vulnerable populations</p>
+      <div class="donut-wrap"><canvas id="clearanceChart" width="90" height="90" style="flex-shrink:0"></canvas>
+        <div id="clearanceLegend" style="flex:1"></div>
+      </div>
+    </div>
+    <div class="dc"><p class="dc-title">Credentialing by Staff Category</p><p class="dc-sub">Centralized tracking &mdash; all programs</p>
+      <div id="credBars" style="margin-top:6px"></div>
+    </div>
+  </div>
+  <p class="sl">&#9658; Centralized Licensure &amp; Credentialing System I Would Build</p>
+  <div class="grid3">
+    <div class="data-card"><div class="data-icon">&#128193;</div><p class="data-title">Centralized Tracker</p><p class="data-desc">Single system tracking all staff, contractors, volunteers, and peer specialists across all 6 programs</p></div>
+    <div class="data-card"><div class="data-icon">&#128276;</div><p class="data-title">Automated Renewal Alerts</p><p class="data-desc">90/60/30-day notifications for expiring clearances, licenses, DEA registrations, and certifications</p></div>
+    <div class="data-card"><div class="data-icon">&#128202;</div><p class="data-title">Monthly Compliance Reports</p><p class="data-desc">Program-by-program credentialing dashboard presented to executive leadership and program directors</p></div>
+  </div>
+</div>
+
+<!-- TAB 4: QUALITY -->
+<div id="tab-quality" class="tab-content">
+  <p class="sl">&#9658; Incident Reports by Program Area &mdash; Monthly Trend</p>
+  <div class="dc" style="margin-bottom:12px"><p class="dc-sub">Tracking across Adult BH, Addiction Services, CARE Crisis, and Children&apos;s BH &mdash; declining trend reflects proactive monitoring</p><canvas id="incidentChart" height="175"></canvas></div>
+  <div class="grid2" style="margin-bottom:12px">
+    <div class="dc"><p class="dc-title">Policy &amp; Procedure Review Status</p><p class="dc-sub">Org-wide &mdash; all 6 programs</p>
+      <div class="donut-wrap"><canvas id="policyChart" width="90" height="90" style="flex-shrink:0"></canvas>
+        <div id="policyLegend" style="flex:1"></div>
+      </div>
+    </div>
+    <div class="dc"><p class="dc-title">Active PDSA Improvement Cycles</p><p class="dc-sub">Current quality initiatives by program</p>
+      <div id="pdsaList" style="margin-top:6px"></div>
+    </div>
+  </div>
+  <p class="sl">&#9658; Accreditation Readiness &mdash; CARF / Joint Commission</p>
+  <div class="grid4">
+    <div class="dc" style="border-top:2px solid var(--red)"><span style="font-size:10px;font-weight:600;color:var(--red);display:block;margin-bottom:4px">Q1 Priority</span><p style="font-weight:600;font-size:12px;color:#fff;margin-bottom:4px">Mock Survey</p><p style="font-size:10px;color:rgba(255,255,255,0.45)">Addiction Services (highest risk)</p></div>
+    <div class="dc" style="border-top:2px solid var(--amber)"><span style="font-size:10px;font-weight:600;color:var(--amber);display:block;margin-bottom:4px">In Progress</span><p style="font-weight:600;font-size:12px;color:#fff;margin-bottom:4px">Documentation Audit</p><p style="font-size:10px;color:rgba(255,255,255,0.45)">Adult BH &amp; Children&apos;s BH</p></div>
+    <div class="dc" style="border-top:2px solid var(--blue)"><span style="font-size:10px;font-weight:600;color:var(--blue);display:block;margin-bottom:4px">Planned Q2</span><p style="font-weight:600;font-size:12px;color:#fff;margin-bottom:4px">Policy Alignment</p><p style="font-size:10px;color:rgba(255,255,255,0.45)">All Programs</p></div>
+    <div class="dc" style="border-top:2px solid var(--green)"><span style="font-size:10px;font-weight:600;color:var(--green);display:block;margin-bottom:4px">Planned Q2</span><p style="font-weight:600;font-size:12px;color:#fff;margin-bottom:4px">Readiness Drills</p><p style="font-size:10px;color:rgba(255,255,255,0.45)">CARE Crisis Unit</p></div>
+  </div>
+</div>
+
+<!-- TAB 5: 90-DAY PLAN -->
+<div id="tab-plan" class="tab-content">
+  <p style="font-size:12px;color:rgba(255,255,255,0.6);margin-bottom:16px;line-height:1.7">A phased approach grounded in The Consortium&apos;s actual programs, regulatory obligations, and highest-risk areas &mdash; covering all 7 pillars of the Director of Quality &amp; Compliance role.</p>
+  <div class="grid3" style="margin-bottom:16px">
+    <div class="phase-card" style="border-top:3px solid var(--teal)">
+      <p class="phase-label" style="color:var(--teal)">Days 1&ndash;30</p>
+      <p class="phase-title">Foundation &amp; Discovery</p>
+      <div class="phase-item"><span style="color:var(--teal);font-weight:700;flex-shrink:0">&#9658;</span><span>Meet with all 6 program directors &mdash; Adult BH, Addiction/MAT, CARE, Children&apos;s BH, SCO, Supported Employment</span></div>
+      <div class="phase-item"><span style="color:var(--teal);font-weight:700;flex-shrink:0">&#9658;</span><span>Complete audit of existing compliance documentation and all open CAPs</span></div>
+      <div class="phase-item"><span style="color:var(--teal);font-weight:700;flex-shrink:0">&#9658;</span><span>Map all regulatory obligations by program: CBH, DBHIDS, OMHSAS, ODP, SAMHSA, DEA, Medicaid</span></div>
+      <div class="phase-item"><span style="color:var(--teal);font-weight:700;flex-shrink:0">&#9658;</span><span>Conduct 42 CFR Part 2 gap assessment for Addiction Services &mdash; highest risk area</span></div>
+      <div class="phase-item"><span style="color:var(--teal);font-weight:700;flex-shrink:0">&#9658;</span><span>Build initial enterprise risk register identifying all active risks, likelihood, and severity</span></div>
+      <div class="phase-item"><span style="color:var(--teal);font-weight:700;flex-shrink:0">&#9658;</span><span>Review HCSIS incident reporting timeliness for SCO</span></div>
+      <div class="phase-item"><span style="color:var(--teal);font-weight:700;flex-shrink:0">&#9658;</span><span>Pull baseline equity data from all program EMRs &mdash; access and outcome rates by population</span></div>
+      <div class="phase-item"><span style="color:var(--teal);font-weight:700;flex-shrink:0">&#9658;</span><span>Establish direct relationships with CBH, DBHIDS, ODP, SAMHSA, and DEA contacts</span></div>
+    </div>
+    <div class="phase-card" style="border-top:3px solid var(--gold)">
+      <p class="phase-label" style="color:var(--gold)">Days 31&ndash;60</p>
+      <p class="phase-title">Build &amp; Structure</p>
+      <div class="phase-item"><span style="color:var(--gold);font-weight:700;flex-shrink:0">&#9658;</span><span>Launch Quality Management System framework across all 6 program areas</span></div>
+      <div class="phase-item"><span style="color:var(--gold);font-weight:700;flex-shrink:0">&#9658;</span><span>Implement 42 CFR Part 2 compliance protocol for Addiction Services and MAT programs</span></div>
+      <div class="phase-item"><span style="color:var(--gold);font-weight:700;flex-shrink:0">&#9658;</span><span>Build centralized regulatory calendar covering all funder monitoring timelines</span></div>
+      <div class="phase-item"><span style="color:var(--gold);font-weight:700;flex-shrink:0">&#9658;</span><span>Implement centralized licensure and credentialing tracker including DEA registrations for MAT</span></div>
+      <div class="phase-item"><span style="color:var(--gold);font-weight:700;flex-shrink:0">&#9658;</span><span>Establish EMR data collection standards and validation protocols across all program databases</span></div>
+      <div class="phase-item"><span style="color:var(--gold);font-weight:700;flex-shrink:0">&#9658;</span><span>Design role-based training curricula: HIPAA, 42 CFR Part 2, mandated reporting, TIC, harm reduction, crisis de-escalation</span></div>
+      <div class="phase-item"><span style="color:var(--gold);font-weight:700;flex-shrink:0">&#9658;</span><span>Execute first full internal audit cycle with findings report to executive team</span></div>
+      <div class="phase-item"><span style="color:var(--gold);font-weight:700;flex-shrink:0">&#9658;</span><span>Present risk register with mitigation strategies and escalation pathways to executive leadership</span></div>
+    </div>
+    <div class="phase-card" style="border-top:3px solid var(--green)">
+      <p class="phase-label" style="color:var(--green)">Days 61&ndash;90</p>
+      <p class="phase-title">Operationalize &amp; Report</p>
+      <div class="phase-item"><span style="color:var(--green);font-weight:700;flex-shrink:0">&#9658;</span><span>Deliver first formal quality and compliance report to executive leadership and Board</span></div>
+      <div class="phase-item"><span style="color:var(--green);font-weight:700;flex-shrink:0">&#9658;</span><span>Present first equity impact assessment to Board with action plan addressing access and outcome gaps</span></div>
+      <div class="phase-item"><span style="color:var(--green);font-weight:700;flex-shrink:0">&#9658;</span><span>Complete mock survey for highest-risk program (Addiction Services / MAT)</span></div>
+      <div class="phase-item"><span style="color:var(--green);font-weight:700;flex-shrink:0">&#9658;</span><span>Launch all role-based training curricula with completion tracking by program and staff category</span></div>
+      <div class="phase-item"><span style="color:var(--green);font-weight:700;flex-shrink:0">&#9658;</span><span>Activate KPI dashboard with real-time compliance visibility across all 6 programs</span></div>
+      <div class="phase-item"><span style="color:var(--green);font-weight:700;flex-shrink:0">&#9658;</span><span>Establish monthly, quarterly, and annual Board reporting cadence for quality and compliance data</span></div>
+      <div class="phase-item"><span style="color:var(--green);font-weight:700;flex-shrink:0">&#9658;</span><span>Conduct first privacy impact assessment cycle for any new systems deployed</span></div>
+      <div class="phase-item"><span style="color:var(--green);font-weight:700;flex-shrink:0">&#9658;</span><span>Present 6-month strategic Quality Management roadmap including accreditation readiness plan</span></div>
+    </div>
+  </div>
+  <div class="dc">
+    <p style="font-size:12px;font-weight:600;color:var(--goldLight);margin-bottom:10px">&#10003; Key Deliverables by Day 90</p>
+    <div class="deliv-grid">
+      <div class="deliv-item"><span style="color:var(--green);flex-shrink:0">&#10003;</span><span>QMS live across all 6 programs</span></div>
+      <div class="deliv-item"><span style="color:var(--green);flex-shrink:0">&#10003;</span><span>42 CFR Part 2 protocol active</span></div>
+      <div class="deliv-item"><span style="color:var(--green);flex-shrink:0">&#10003;</span><span>Risk register to Board</span></div>
+      <div class="deliv-item"><span style="color:var(--green);flex-shrink:0">&#10003;</span><span>DEA &amp; SAMHSA contacts active</span></div>
+      <div class="deliv-item"><span style="color:var(--green);flex-shrink:0">&#10003;</span><span>First Board compliance report</span></div>
+      <div class="deliv-item"><span style="color:var(--green);flex-shrink:0">&#10003;</span><span>Equity assessment delivered</span></div>
+      <div class="deliv-item"><span style="color:var(--green);flex-shrink:0">&#10003;</span><span>Mock survey completed (MAT)</span></div>
+      <div class="deliv-item"><span style="color:var(--green);flex-shrink:0">&#10003;</span><span>All training curricula launched</span></div>
+      <div class="deliv-item"><span style="color:var(--green);flex-shrink:0">&#10003;</span><span>KPI dashboard operational</span></div>
+      <div class="deliv-item"><span style="color:var(--green);flex-shrink:0">&#10003;</span><span>EMR data standards set</span></div>
+      <div class="deliv-item"><span style="color:var(--green);flex-shrink:0">&#10003;</span><span>Board reporting cadence live</span></div>
+      <div class="deliv-item"><span style="color:var(--green);flex-shrink:0">&#10003;</span><span>Privacy impact process launched</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB 6: DATA, EQUITY & RISK -->
+<div id="tab-data" class="tab-content">
+  <p class="sl">&#9658; Enterprise Risk Register &mdash; Active Risks &amp; Mitigation Strategies</p>
+  <div id="riskList" style="margin-bottom:18px"></div>
+  <p class="sl">&#9658; Equity Impact Assessment &mdash; Service Access &amp; Outcomes by Population</p>
+  <div class="grid2" style="margin-bottom:14px">
+    <div class="dc"><p class="dc-title">Service Access Rate by Population</p><p class="dc-sub">% of eligible individuals enrolled in services</p><div id="accessBars" style="margin-top:4px"></div></div>
+    <div class="dc"><p class="dc-title">Outcome Achievement Rate by Population</p><p class="dc-sub">% achieving treatment goals / service objectives</p><div id="outcomeBars" style="margin-top:4px"></div></div>
+  </div>
+  <div class="alert-box" style="background:rgba(74,140,196,0.12);border:1px solid var(--blue);margin-bottom:18px">
+    <p style="font-size:12px;color:rgba(255,255,255,0.85);line-height:1.65"><strong style="color:var(--blue)">Equity Action:</strong> Data shows Asian/Pacific Islander populations have the lowest access (47%) and outcome rates (41%). As Director, I would use this data to drive targeted outreach, culturally responsive training, and service delivery adjustments &mdash; reporting equity trends quarterly to the Board as required by CBH and DBHIDS standards.</p>
+  </div>
+  <p class="sl">&#9658; Data Governance Framework &amp; Board Reporting Cadence</p>
+  <div class="grid3" style="margin-bottom:14px">
+    <div class="board-card" style="border-top:3px solid var(--teal)">
+      <p class="board-cadence" style="color:var(--teal)">Monthly Reports</p>
+      <div class="board-item"><span style="color:var(--teal);flex-shrink:0">&#9658;</span><span>Incident summary by program</span></div>
+      <div class="board-item"><span style="color:var(--teal);flex-shrink:0">&#9658;</span><span>Training completion rates</span></div>
+      <div class="board-item"><span style="color:var(--teal);flex-shrink:0">&#9658;</span><span>Open CAP status</span></div>
+      <div class="board-item"><span style="color:var(--teal);flex-shrink:0">&#9658;</span><span>Staff clearance currency</span></div>
+    </div>
+    <div class="board-card" style="border-top:3px solid var(--gold)">
+      <p class="board-cadence" style="color:var(--gold)">Quarterly Reports</p>
+      <div class="board-item"><span style="color:var(--gold);flex-shrink:0">&#9658;</span><span>Compliance score by program</span></div>
+      <div class="board-item"><span style="color:var(--gold);flex-shrink:0">&#9658;</span><span>Audit findings &amp; resolution</span></div>
+      <div class="board-item"><span style="color:var(--gold);flex-shrink:0">&#9658;</span><span>Risk register update</span></div>
+      <div class="board-item"><span style="color:var(--gold);flex-shrink:0">&#9658;</span><span>Funder monitoring results</span></div>
+      <div class="board-item"><span style="color:var(--gold);flex-shrink:0">&#9658;</span><span>42 CFR Part 2 compliance status</span></div>
+    </div>
+    <div class="board-card" style="border-top:3px solid var(--green)">
+      <p class="board-cadence" style="color:var(--green)">Annual Reports</p>
+      <div class="board-item"><span style="color:var(--green);flex-shrink:0">&#9658;</span><span>Quality improvement outcomes</span></div>
+      <div class="board-item"><span style="color:var(--green);flex-shrink:0">&#9658;</span><span>Equity impact assessment</span></div>
+      <div class="board-item"><span style="color:var(--green);flex-shrink:0">&#9658;</span><span>Accreditation readiness report</span></div>
+      <div class="board-item"><span style="color:var(--green);flex-shrink:0">&#9658;</span><span>Enterprise risk assessment</span></div>
+      <div class="board-item"><span style="color:var(--green);flex-shrink:0">&#9658;</span><span>Policy inventory review</span></div>
+    </div>
+  </div>
+  <div class="grid4">
+    <div class="data-card"><div class="data-icon">&#127973;</div><p class="data-title">EMR Data Standards</p><p class="data-desc">Collection standards and validation protocols across all program databases and clinical EMRs</p></div>
+    <div class="data-card"><div class="data-icon">&#128274;</div><p class="data-title">Privacy Impact Assessments</p><p class="data-desc">Conducted when new systems are deployed &mdash; HIPAA, 42 CFR Part 2, and data security review</p></div>
+    <div class="data-card"><div class="data-icon">&#128225;</div><p class="data-title">Predictive Analytics</p><p class="data-desc">Early warning indicators and trend analysis to flag compliance risk before it becomes an audit finding</p></div>
+    <div class="data-card"><div class="data-icon">&#9878;</div><p class="data-title">Equity Impact Tracking</p><p class="data-desc">Longitudinal equity data drawn from Consortium program databases reported to Board annually</p></div>
+  </div>
+</div>
+
+</div>
+
+<script>
+const NAVY='#0f2640', TEAL='#1a6b60', GOLD='#d4a843', GOLD_LIGHT='#e8c86a';
+const GREEN='#2d9e6b', AMBER='#e09b2d', RED='#c94040', BLUE='#4a8cc4';
+const PURPLE='#7b5ea7', ORANGE='#d4693a';
+const GRID='rgba(255,255,255,0.07)', TICK='rgba(255,255,255,0.45)';
+
+const ttDefaults = {
+  backgroundColor:NAVY, borderColor:GOLD, borderWidth:1,
+  titleColor:GOLD_LIGHT, bodyColor:'#fff', padding:10
+};
+const scaleDefaults = {
+  x:{grid:{color:GRID},ticks:{color:TICK,font:{size:9}},border:{display:false}},
+  y:{grid:{color:GRID},ticks:{color:TICK,font:{size:9}},border:{display:false}},
+};
+
+// ── DATA ────────────────────────────────────────────────────
+const programs = [
+  {name:"Adult Behavioral Health",current:68,target:90,color:BLUE,reg:"CBH / DBHIDS / OMHSAS",services:"Outpatient, Blended Case Mgmt, CIRC/SEEDS"},
+  {name:"Addiction Services / MAT",current:61,target:88,color:RED,reg:"CBH / SAMHSA / DEA / 42 CFR Part 2",services:"Suboxone, Methadone, IOP/OP, WORD Program"},
+  {name:"CARE Mobile Crisis Unit",current:74,target:92,color:ORANGE,reg:"DBHIDS / 988 Standards",services:"Mobile crisis response, 302 facilitation"},
+  {name:"Children\u2019s Behavioral Health",current:71,target:91,color:PURPLE,reg:"CBH / DBHIDS / DHS",services:"Outpatient, Blended Case Mgmt, FFT"},
+  {name:"Supports Coordination (SCO)",current:79,target:95,color:TEAL,reg:"ODP / HCSIS / Medicaid Waiver",services:"IDD supports coordination, ISP tracking"},
+  {name:"Supported Employment",current:65,target:85,color:GREEN,reg:"CBH / OVR / DBHIDS",services:"The Greenhouse \u2014 job placement, peer support"},
+];
+
+const funders = [
+  {name:"Community Behavioral Health (CBH)",status:"Q2 Audit Scheduled",color:AMBER,note:"Primary Medicaid managed care \u2014 BH & Addiction"},
+  {name:"DBHIDS \u2014 City of Philadelphia",status:"Annual Review Q3",color:BLUE,note:"Licensing & oversight \u2014 all BH programs"},
+  {name:"OMHSAS \u2014 PA Dept. of Human Services",status:"Passed Q4",color:GREEN,note:"State BH licensing, 55 Pa. Code compliance"},
+  {name:"ODP \u2014 Office of Dev. Programs",status:"Q1 Due",color:RED,note:"IDD/SCO services \u2014 HCSIS, Chapter 6400"},
+  {name:"SAMHSA \u2014 Federal Addiction Services",status:"Quarterly Reporting",color:PURPLE,note:"Federal SUD funding, 42 CFR Part 2"},
+  {name:"DEA \u2014 Drug Enforcement Admin.",status:"Annual Inspection",color:ORANGE,note:"MAT program \u2014 methadone/suboxone licensure"},
+  {name:"Medicaid / HealthChoices",status:"Monthly Billing Review",color:TEAL,note:"Claims accuracy, billing compliance"},
+];
+
+const training = [
+  {name:"HIPAA / PHI Handling",rate:89},{name:"42 CFR Part 2",rate:71},
+  {name:"Mandated Reporting",rate:86},{name:"Cultural Humility",rate:77},
+  {name:"Trauma-Informed Care",rate:80},{name:"Harm Reduction",rate:69},
+  {name:"Infection Control",rate:84},{name:"Medication Safety / MAT",rate:76},
+  {name:"Consumer Rights (BH/IDD)",rate:83},{name:"Crisis De-escalation",rate:79},
+  {name:"Suicide Prevention / 988",rate:82},{name:"Onboarding / Competency",rate:91},
+];
+
+const clearance = [{name:"Current",value:73,color:GREEN},{name:"Expiring 90d",value:18,color:AMBER},{name:"Expired",value:9,color:RED}];
+const capStatus = [{name:"Resolved",value:60,color:GREEN},{name:"In Progress",value:29,color:AMBER},{name:"Under Review",value:11,color:RED}];
+const policy = [{name:"Current",value:52,color:GREEN},{name:"Due Within 90 Days",value:29,color:AMBER},{name:"Overdue",value:17,color:RED}];
+
+const pdsa = [
+  {t:"42 CFR Part 2 Protocol Build",phase:"Plan",c:RED,prog:"Addiction Services"},
+  {t:"HCSIS Incident Timeliness",phase:"Do",c:TEAL,prog:"SCO / IDD"},
+  {t:"MAT Documentation Standards",phase:"Study",c:BLUE,prog:"Addiction / MAT"},
+  {t:"Children\u2019s Grievance Process",phase:"Act \u2713",c:GREEN,prog:"Children\u2019s BH"},
+  {t:"CARE Crisis Debrief Protocol",phase:"Do",c:ORANGE,prog:"CARE Mobile Crisis"},
+];
+
+const risks = [
+  {risk:"42 CFR Part 2 Non-Compliance",prog:"Addiction Services / MAT",level:"Critical",color:RED,mit:"Dedicated compliance protocol \u2014 Day 1 priority"},
+  {risk:"DEA Inspection Readiness",prog:"Addiction Services / MAT",level:"High",color:RED,mit:"Mock inspection Q1 \u2014 regulatory relationship needed"},
+  {risk:"Staff Clearance Lapses",prog:"All Programs",level:"High",color:RED,mit:"Centralized tracker with 90-day renewal alerts"},
+  {risk:"HCSIS Reporting Gaps",prog:"SCO / IDD",level:"High",color:AMBER,mit:"PDSA cycle active \u2014 timeliness protocol in progress"},
+  {risk:"CBH Billing Accuracy",prog:"Adult BH / Addiction",level:"High",color:AMBER,mit:"Monthly billing audit \u2014 error rate tracking"},
+  {risk:"Children\u2019s Mandated Reporting",prog:"Children\u2019s BH",level:"High",color:AMBER,mit:"Role-based training curricula \u2014 Q1 launch"},
+  {risk:"Policy Currency Gaps",prog:"All Programs",level:"Medium",color:GOLD,mit:"Policy review calendar \u2014 90-day cycle"},
+  {risk:"CARE Documentation Standards",prog:"CARE Mobile Crisis",level:"Medium",color:GOLD,mit:"Protocol update \u2014 Q2"},
+];
+
+const equity = [
+  {pop:"Black / African American",access:82,outcomes:74,color:BLUE},
+  {pop:"Hispanic / Latino",access:64,outcomes:58,color:PURPLE},
+  {pop:"White / Non-Hispanic",access:88,outcomes:83,color:TEAL},
+  {pop:"Asian / Pacific Islander",access:47,outcomes:41,color:ORANGE},
+  {pop:"Multi-racial",access:69,outcomes:62,color:GREEN},
+  {pop:"Unknown / Declined",access:55,outcomes:49,color:'#888'},
+];
+
+// ── TAB SWITCHING ────────────────────────────────────────────
+function showTab(id) {
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ── COUNTER ANIMATION ────────────────────────────────────────
+function animateCounter(el, target, suffix) {
+  let v=0; const step=target/40;
+  const t=setInterval(()=>{ v+=step; if(v>=target){el.textContent=target+suffix;clearInterval(t);}else el.textContent=Math.floor(v)+suffix; },30);
+}
+
+// ── BUILD DYNAMIC HTML ───────────────────────────────────────
+function buildProgramBars() {
+  const el = document.getElementById('programBars');
+  el.innerHTML = programs.map(p=>`
+    <div class="prog-row">
+      <span class="prog-label" style="font-size:9px;color:rgba(255,255,255,0.65);width:120px;flex:0 0 120px">${p.name}</span>
+      <div class="prog-track"><div class="prog-fill" style="width:${p.current}%;background:${p.color}"></div></div>
+      <span class="prog-val" style="color:${p.color}">${p.current}%</span>
+    </div>`).join('');
+}
+
+function buildProgramCards() {
+  const el = document.getElementById('programCards');
+  el.innerHTML = programs.map(p=>{
+    const s = p.current>=75?'On Track':p.current>=65?'At Risk':'High Risk';
+    const sc = p.current>=75?GREEN:p.current>=65?AMBER:RED;
+    return `<div class="lc" style="border-left:4px solid ${p.color}">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+        <div><p style="font-weight:600;font-size:13px;color:#0f2640">${p.name}</p><p style="font-size:10px;color:#5a7068;margin-top:2px">${p.services}</p></div>
+        <span style="font-size:9px;font-weight:700;padding:2px 7px;border-radius:99px;background:${sc}18;color:${sc};flex-shrink:0;margin-left:8px">${s}</span>
+      </div>
+      <div style="margin-bottom:5px">
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#5a7068;margin-bottom:3px"><span>Now: ${p.current}%</span><span>Target: ${p.target}%</span></div>
+        <div style="height:5px;background:#daeae4;border-radius:99px"><div style="height:5px;width:${p.current}%;border-radius:99px;background:${p.color}"></div></div>
+      </div>
+      <p style="font-size:10px;color:#5a7068">Regulator: <strong style="color:#0f2640">${p.reg}</strong></p>
+    </div>`;
+  }).join('');
+}
+
+function buildFunderList() {
+  const el = document.getElementById('funderList');
+  el.innerHTML = funders.map(f=>`
+    <div class="funder-row" style="border-left:4px solid ${f.color}">
+      <div style="flex:1"><p class="funder-name">${f.name}</p><p class="funder-note">${f.note}</p></div>
+      <span class="badge" style="color:${f.color};background:${f.color}22">${f.status}</span>
+    </div>`).join('');
+}
+
+function buildTrainingBars() {
+  const el = document.getElementById('trainingBars');
+  el.innerHTML = training.map(t=>{
+    const c=t.rate>=85?GREEN:t.rate>=75?GOLD:AMBER;
+    return `<div>
+      <div style="display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,0.85);margin-bottom:3px"><span>${t.name}</span><span style="color:${c};font-weight:600">${t.rate}%</span></div>
+      <div style="height:6px;background:rgba(255,255,255,0.1);border-radius:99px"><div style="height:6px;width:${t.rate}%;border-radius:99px;background:${c}"></div></div>
+    </div>`;
+  }).join('');
+}
+
+function buildCredBars() {
+  const el = document.getElementById('credBars');
+  const creds = [
+    {g:"Adult BH Direct Care (89)",c:64,e:18,x:7},
+    {g:"Addiction / MAT Staff (34)",c:23,e:7,x:4},
+    {g:"CARE Mobile Crisis (22)",c:17,e:4,x:1},
+    {g:"Children\'s BH Staff (41)",c:31,e:7,x:3},
+    {g:"SCO / IDD Coord. (28)",c:22,e:5,x:1},
+    {g:"Employment / Admin (19)",c:15,e:3,x:1},
+  ];
+  el.innerHTML = creds.map(r=>{
+    const tot=r.c+r.e+r.x;
+    return `<div style="margin-bottom:9px">
+      <div style="font-size:10px;color:rgba(255,255,255,0.7);margin-bottom:3px">${r.g}</div>
+      <div style="height:6px;background:rgba(255,255,255,0.1);border-radius:99px;overflow:hidden;display:flex">
+        <div style="flex:${r.c};background:${GREEN}"></div>
+        <div style="flex:${r.e};background:${AMBER}"></div>
+        <div style="flex:${r.x};background:${RED}"></div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function buildDonutLegend(id, data) {
+  const el = document.getElementById(id);
+  el.innerHTML = data.map(d=>`
+    <div class="legend-item">
+      <div class="legend-dot" style="background:${d.color}"></div>
+      <span>${d.name}</span>
+      <span class="legend-val">${d.value}%</span>
+    </div>`).join('');
+}
+
+function buildPdsaList() {
+  const el = document.getElementById('pdsaList');
+  el.innerHTML = pdsa.map(p=>`
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 10px;background:rgba(255,255,255,0.05);border-radius:3px;border-left:3px solid ${p.c};margin-bottom:7px">
+      <div><span style="font-size:11px;color:rgba(255,255,255,0.85)">${p.t}</span><p style="font-size:9px;color:rgba(255,255,255,0.4);margin-top:1px">${p.prog}</p></div>
+      <span style="font-size:10px;font-weight:600;color:${p.c};background:${p.c}22;padding:2px 8px;border-radius:99px;flex-shrink:0;margin-left:8px">${p.phase}</span>
+    </div>`).join('');
+}
+
+function buildRiskList() {
+  const el = document.getElementById('riskList');
+  el.innerHTML = risks.map(r=>`
+    <div class="risk-row" style="border-left:4px solid ${r.color}">
+      <div style="flex:2"><p class="risk-name">${r.risk}</p><p class="risk-prog">${r.prog}</p></div>
+      <span class="badge" style="color:${r.color};background:${r.color}22">${r.level}</span>
+      <p class="risk-mitigation" style="flex:2">${r.mit}</p>
+    </div>`).join('');
+}
+
+function buildEquityBars() {
+  const access = document.getElementById('accessBars');
+  const outcome = document.getElementById('outcomeBars');
+  access.innerHTML = equity.map(e=>`
+    <div class="prog-row" style="margin-bottom:9px">
+      <span style="font-size:9px;color:rgba(255,255,255,0.65);width:140px;flex:0 0 140px">${e.pop}</span>
+      <div class="prog-track"><div class="prog-fill" style="width:${e.access}%;background:${e.color}"></div></div>
+      <span style="font-size:9px;font-weight:600;color:${e.color};width:28px;text-align:right">${e.access}%</span>
+    </div>`).join('');
+  outcome.innerHTML = equity.map(e=>`
+    <div class="prog-row" style="margin-bottom:9px">
+      <span style="font-size:9px;color:rgba(255,255,255,0.65);width:140px;flex:0 0 140px">${e.pop}</span>
+      <div class="prog-track"><div class="prog-fill" style="width:${e.outcomes}%;background:${e.color}"></div></div>
+      <span style="font-size:9px;font-weight:600;color:${e.color};width:28px;text-align:right">${e.outcomes}%</span>
+    </div>`).join('');
+}
+
+// ── CHART.JS CHARTS ──────────────────────────────────────────
+function initCharts() {
+  // Compliance Trend
+  new Chart(document.getElementById('trendChart'), {
+    type:'line',
+    data:{labels:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+      datasets:[{label:'Score',data:[72,75,74,79,82,81,85,88,87,91,90,94],borderColor:TEAL,borderWidth:2,fill:true,
+        backgroundColor:ctx=>{const g=ctx.chart.ctx.createLinearGradient(0,0,0,150);g.addColorStop(0,'rgba(26,107,96,0.35)');g.addColorStop(1,'rgba(26,107,96,0)');return g},
+        tension:0.4,pointRadius:0}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:ttDefaults},
+      scales:{...scaleDefaults,y:{...scaleDefaults.y,min:60,max:100,ticks:{...scaleDefaults.y.ticks,callback:v=>v+'%'}}}}
+  });
+
+  // Audit Chart
+  new Chart(document.getElementById('auditChart'), {
+    type:'bar',
+    data:{labels:['Q1','Q2','Q3','Q4'],
+      datasets:[{label:'Opened',data:[18,14,10,7],backgroundColor:RED,borderRadius:3},{label:'Resolved',data:[11,16,13,10],backgroundColor:GREEN,borderRadius:3}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:TICK,font:{size:10}}},tooltip:ttDefaults},scales:scaleDefaults}
+  });
+
+  // CAP Donut
+  new Chart(document.getElementById('capChart'), {
+    type:'doughnut',
+    data:{labels:capStatus.map(d=>d.name),datasets:[{data:capStatus.map(d=>d.value),backgroundColor:capStatus.map(d=>d.color),borderWidth:0}]},
+    options:{cutout:'60%',plugins:{legend:{display:false},tooltip:{...ttDefaults,callbacks:{label:i=>`${i.label}: ${i.parsed}%`}}}}
+  });
+  buildDonutLegend('capLegend', capStatus);
+
+  // Clearance Donut
+  new Chart(document.getElementById('clearanceChart'), {
+    type:'doughnut',
+    data:{labels:clearance.map(d=>d.name),datasets:[{data:clearance.map(d=>d.value),backgroundColor:clearance.map(d=>d.color),borderWidth:0}]},
+    options:{cutout:'60%',plugins:{legend:{display:false},tooltip:{...ttDefaults,callbacks:{label:i=>`${i.label}: ${i.parsed}%`}}}}
+  });
+  buildDonutLegend('clearanceLegend', clearance);
+
+  // Incident Chart
+  new Chart(document.getElementById('incidentChart'), {
+    type:'line',
+    data:{labels:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+      datasets:[
+        {label:'Adult BH',data:[10,9,11,8,7,9,6,5,4,5,3,2],borderColor:BLUE,borderWidth:1.5,fill:true,backgroundColor:'rgba(74,140,196,0.15)',tension:0.4,pointRadius:0},
+        {label:'Addiction/MAT',data:[7,6,8,6,5,7,5,4,3,4,3,2],borderColor:RED,borderWidth:1.5,fill:true,backgroundColor:'rgba(201,64,64,0.12)',tension:0.4,pointRadius:0},
+        {label:'CARE Crisis',data:[4,3,5,3,2,4,2,2,1,2,1,1],borderColor:ORANGE,borderWidth:1.5,fill:true,backgroundColor:'rgba(212,105,58,0.12)',tension:0.4,pointRadius:0},
+        {label:'Children BH',data:[6,5,7,5,4,5,4,3,3,3,2,2],borderColor:PURPLE,borderWidth:1.5,fill:true,backgroundColor:'rgba(123,94,167,0.12)',tension:0.4,pointRadius:0},
+      ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:TICK,font:{size:10}}},tooltip:ttDefaults},scales:scaleDefaults}
+  });
+
+  // Policy Donut
+  new Chart(document.getElementById('policyChart'), {
+    type:'doughnut',
+    data:{labels:policy.map(d=>d.name),datasets:[{data:policy.map(d=>d.value),backgroundColor:policy.map(d=>d.color),borderWidth:0}]},
+    options:{cutout:'60%',plugins:{legend:{display:false},tooltip:{...ttDefaults,callbacks:{label:i=>`${i.label}: ${i.parsed}%`}}}}
+  });
+  buildDonutLegend('policyLegend', policy);
+}
+
+// ── INIT ─────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', ()=>{
+  animateCounter(document.getElementById('c1'), 86, '%');
+  animateCounter(document.getElementById('c2'), 7, '');
+  animateCounter(document.getElementById('c3'), 80, '%');
+  animateCounter(document.getElementById('c4'), 12, '');
+  animateCounter(document.getElementById('c5'), 6, '');
+  buildProgramBars();
+  buildProgramCards();
+  buildFunderList();
+  buildTrainingBars();
+  buildCredBars();
+  buildPdsaList();
+  buildRiskList();
+  buildEquityBars();
+  initCharts();
+});
+</script>
+</body>
+</html>
